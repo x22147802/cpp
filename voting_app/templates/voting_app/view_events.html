@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'voting_app/eventpage/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'voting_app/eventpage/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'voting_app/eventpage/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'voting_app/eventpage/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'voting_app/eventpage/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <link href="{% static 'voting_app/eventpage/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'voting_app/eventpage/css/style.css' %}" rel="stylesheet">
+
+<style>
+.new-error-message {
+  color: #fff;
+  background: #ed3c0d;
+  text-align: center;
+  padding: 15px;
+  margin-bottom: 24px;
+  font-weight: 600;
+}
+
+</style>
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+      <a href="/" class="logo d-flex align-items-center">
+        <span>onlinePoll</span>
+      </a>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto" href="/">Home</a></li>
+          {% if user.is_superuser %}
+           <li><a class="nav-link scrollto" href="{% url 'create_campaign' %}">Create Campaign</a></li>
+           <li><a class="nav-link scrollto active" href="{% url 'manage_events' %}">Manage Campaigns</a></li>
+          {% endif %}
+          <li><a class="nav-link scrollto" href="#services">Library</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'logout' %}">Logout</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+  <main id="main">
+
+     <!-- ======= Features Section ======= -->
+     <section id="features" class="features">
+
+      <div class="container" data-aos="fade-up">
+
+        <header class="section-header mt-5 mb-3">
+          <p>Campaigns Information</p>
+        </header>
+
+        <div class="row">
+
+          <div class="col-lg-6">
+            <img src="{% static 'voting_app/eventpage/img/features-2.png' %}" class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-6 mt-5 mt-lg-0">
+            <div class="row align-self-center gy-4">
+
+              
+              {% if events%}
+               {% for event in events %}
+                <div class="col-12" data-aos="zoom-out" data-aos-delay="200">
+                  <div class="feature-box d-flex align-items-center">
+                     <i class="bi bi-check"></i>
+                      <h3> 
+                        <a href="/edit_event/{{event.id}}">
+                         <span>{{event.event_name}}</span>  
+                        </a>  
+                      </h3>
+                  </div>
+                </div>
+               {% endfor %}
+              {% endif %}
+
+            </div>
+          </div>
+
+        </div> <!-- / row -->
+
+      </div>
+
+    </section><!-- End Features Section -->
+
+  </main><!-- End #main -->
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'voting_app/eventpage/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{% static 'voting_app/eventpage/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'voting_app/eventpage/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'voting_app/eventpage/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'voting_app/eventpage/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'voting_app/eventpage/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'voting_app/eventpage/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'voting_app/eventpage/js/main.js' %}"></script>
+
+</body>
+
+</html>

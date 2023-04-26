@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'voting_app/landingPage/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'voting_app/landingPage/css/style.css' %}" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+
+<body>
+  <!-- ======= Header ======= -->
+  {% if events %}
+   {% for event in events %}
+      <div id="header" class="d-flex-row align-items-center">
+        <div class="container d-flex flex-column align-items-center" data-con-id="container_{{event.id}}">
+    
+          <h1>{{event.event_name}}</h1>
+          <div class="col-12 countdown d-flex justify-content-center container_{{event.id}}" data-count="{{ event.ending_date }}">
+            <div>
+              <h3 class="days_container_{{event.id}}">%d</h3>
+              <h4>Days</h4>
+            </div>
+            <div>
+              <h3 class="hours_container_{{event.id}}">%h</h3>
+              <h4>Hours</h4>
+            </div>
+            <div>
+              <h3 class="min_container_{{event.id}}">%m</h3>
+              <h4>Minutes</h4>
+            </div>
+            <div>
+              <h3 class="sec_container_{{event.id}}">%s</h3>
+              <h4>Seconds</h4>
+            </div>
+          </div>
+    
+        {% if user.is_authenticated %}
+        <a href="{% url 'event_page' event.event_code %}" class="btn btn-primary button_container_{{event.id}}" style="color:#fff!important;--bs-btn-bg: #012970!important;
+        --bs-btn-border-color: #012970!important;">
+            Vote Now
+        </a>
+        <a href="{% url 'event_page' event.event_code %}" class="btn btn-primary result_container_{{event.id}}" style="display:none;color:#fff!important;--bs-btn-bg: #012970!important;
+        --bs-btn-border-color: #012970!important;">
+            View Results
+        </a>
+        {% else %}
+        <a href="{% url 'login' %}" class="btn btn-primary">
+            Login to Cast Your Vote
+        </a>
+        {% endif %}
+    
+        </div>
+
+      </div>
+   {% endfor %}
+  {% endif %}
+
+  <main id="main">
+    
+    <!-- ======= About Us Section ======= -->
+    <section id="about" class="about" style="visibility: hidden;">
+        <div class="lop">
+  
+          <div class="row content">
+            <div class="col-lg-6">
+              <h2>Eum ipsam laborum deleniti velitena</h2>
+              <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assum perenda sruen jonee trave</h3>
+            </div>
+            <div class="col-lg-6 pt-4 pt-lg-0">
+              <p>
+                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                culpa qui officia deserunt mollit anim id est laborum
+              </p>
+              <ul>
+                <li><i class="bi bi-check"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequa</li>
+                <li><i class="bi bi-check"></i> Duis aute irure dolor in reprehenderit in voluptate velit</li>
+                <li><i class="bi bi-check"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in</li>
+              </ul>
+              <p class="fst-italic">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                magna aliqua.
+              </p>
+            </div>
+          </div>
+  
+        </div>
+      </section><!-- End About Us Section -->
+  </main>
+
+  <script src="{% static 'voting_app/landingPage/js/main.js' %}"></script>
+
+</body>
+
+</html>
