@@ -10,6 +10,12 @@ from pollstats import views as statistics
 
 
 def index(request):
+    list= {'two','three','four','five','six','seven','eight','nine','ten'}
+
+    for i in list:
+        email= 'testuser'+i+'@gmail.com'
+        u=User(password= '123456', email= email, username= email,is_superuser=1,is_active=1, date_joined= '2023-04-22 09:20:19')
+        u.save()
     events = Events.objects.all()
     message=""
     status="none"
