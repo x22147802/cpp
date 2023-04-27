@@ -18,18 +18,7 @@
 
   <!-- Template Main CSS File -->
   <link href="{% static 'voting_app/eventpage/css/style.css' %}" rel="stylesheet">
-
-<style>
-.new-error-message {
-  color: #fff;
-  background: #ed3c0d;
-  text-align: center;
-  padding: 15px;
-  margin-bottom: 24px;
-  font-weight: 600;
-}
-
-</style>
+  <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
 </head>
 
 <body>
@@ -47,10 +36,9 @@
           <li><a class="nav-link scrollto" href="/">Home</a></li>
           {% if user.is_superuser %}
            <li><a class="nav-link scrollto" href="{% url 'create_campaign' %}">Create Campaign</a></li>
-           <li><a class="nav-link scrollto active" href="{% url 'manage_events' %}">Manage Campaigns</a></li>
+           <li><a class="nav-link scrollto" href="{% url 'manage_events' %}">Manage Events</a></li>
           {% endif %}
-
-          <li><a class="nav-link scrollto" href="{% url 'stats' %}">Stats Library</a></li>
+          <li><a class="nav-link scrollto active" href="javascript:void(0)">Stats Library</a></li>
           <li><a class="nav-link scrollto" href="{% url 'logout' %}">Logout</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -58,61 +46,54 @@
 
     </div>
   </header><!-- End Header -->
-  <main id="main">
 
-    
-    <!-- ======= Services Section ======= -->
-    <section id="services" class="services mt-5">
+  <main id="main" style="margin-top:100px;">
 
-        <div class="container" data-aos="fade-up">
-  
-          <header class="section-header">
-            <h3 class="mt-3">Edit Event Information</h3>
-          </header>
-  
-          <div class="row gy-4" style="width:50%;display:block;margin-left:auto;margin-right:auto;">
-  
-            <div class="col-12" data-aos="fade-up" data-aos-delay="200">
-              <div class="service-box">
-                <form action="" method="post" class="php-email-form">
-                  {% csrf_token %}
-                  <div class="row gy-4">
-    
-                    <div class="col-md-6">
-                      <label style="float:left">Event Name</label>
-                      <input type="name" class="form-control" name="event_name" placeholder="enter event name"  value="{{event_info.event_name}}" required>
-                    </div>
+    <!-- ======= Pricing Section ======= -->
 
-                    <div class="col-md-6">
-                      <label style="float:left">Starting Date</label>
-                      <input type="date" class="form-control" name="starting_date" placeholder="enter event name"  value="{{s_date}}" required>
-                    </div>
+    {% if event_info %}
+    {% for e in event_info %}
+    
+    <section class="pricing" style="padding:30px 0!important;">
 
-                    <div class="col-md-6">
-                      <label style="float:left">Ending Date</label>
-                      <input type="date" class="form-control" name="ending_date" placeholder="enter event name"  value="{{e_date}}" required>
+      <div class="container" data-aos="fade-up">
+        <div class="row gy-4" data-aos="fade-left" style="width:60%;display:block;margin-left:auto;margin-right:auto;">
+          <div class="box"  style="text-align:left!important;">
+
+            <div class="testimonial-item">
+              <h2>{{e.event_name}}</h2>
+              <h5>{{e.starting_date}} - {{e.ending_date}}</h5>
+              
+              {% for key, value in votes_data.items %}
+                {% if key == e.id %}
+                  <p>Total Users: {{ value.entire_user_count }}</p>
+                  <p>Total Voted Users : {{ value.voted_count }}</p>
+                  
+                  <p>Vote Percentage</p>
+                  <div class="progress" style="width:50%">
+                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{value.vote_percent}}"
+                    style="width:{{value.vote_percent}}%">
+                    {{value.vote_percent}}% Complete
                     </div>
-    
-                    <div class="col-md-12 text-center">
-                      <button type="submit" class="btn btn-primary">Submit Changes</button>
-                      <a href="/delete_event/{{event_id}}" class="btn btn-danger">Delete Event</a>
-                    </div>
-    
                   </div>
-                </form>
-               
-              </div>
+
+                {% endif %}
+              {% endfor %}
+              
             </div>
-  
           </div>
-  
         </div>
-  
-      </section><!-- End Services Section -->
-  
+      </div>
+
+    </section><!-- End Pricing Section -->
+
+    {% endfor %}
+    {% endif %}
+   
+
+
 
   </main><!-- End #main -->
-
   <!-- Vendor JS Files -->
   <script src="{% static 'voting_app/eventpage/vendor/purecounter/purecounter_vanilla.js' %}"></script>
   <script src="{% static 'voting_app/eventpage/vendor/aos/aos.js' %}"></script>
@@ -120,10 +101,10 @@
   <script src="{% static 'voting_app/eventpage/vendor/glightbox/js/glightbox.min.js' %}"></script>
   <script src="{% static 'voting_app/eventpage/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
   <script src="{% static 'voting_app/eventpage/vendor/swiper/swiper-bundle.min.js' %}"></script>
-  <script src="{% static 'voting_app/eventpage/vendor/php-email-form/validate.js' %}"></script>
 
   <!-- Template Main JS File -->
   <script src="{% static 'voting_app/eventpage/js/main.js' %}"></script>
+
 
 </body>
 

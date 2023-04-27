@@ -161,7 +161,7 @@
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
       <a href="/" class="logo d-flex align-items-center">
-        <span>onlinePoll</span>
+        <span>OnlinePoll</span>
       </a>
 
       <nav id="navbar" class="navbar">
@@ -172,7 +172,7 @@
            <li><a class="nav-link scrollto" href="{% url 'create_campaign' %}">Create Campaign</a></li>
            <li><a class="nav-link scrollto" href="{% url 'manage_events' %}">Manage Events</a></li>
           {% endif %}
-          <li><a class="nav-link scrollto" href="#services">Library</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'stats' %}">Stats Library</a></li>
           <li><a class="nav-link scrollto" href="{% url 'logout' %}">Logout</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>

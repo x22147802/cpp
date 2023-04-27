@@ -6,6 +6,7 @@ from .models import Enquiry, Events, Options, Transactions
 from django.contrib.auth.models import User
 import string
 from random import choice
+from pollstats import views as statistics
 
 
 def index(request):
@@ -359,7 +360,16 @@ def create_campaign(request):
 
     return render(request, 'voting_app/create_campaign.html',{})
 
-
+def stats(req):
+   
+   events= Events.objects.filter()
+   data= {}
+   for e in events:
+    # get stats for each event iteration
+    data[e.id]= statistics.getusernumbers(e.event_code,e.id)
+   print(data)
+   
+   return render(req, 'voting_app/stats.html',{'event_info':events, 'votes_data':data})
 
 
     

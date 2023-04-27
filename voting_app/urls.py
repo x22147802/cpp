@@ -14,4 +14,5 @@ urlpatterns = [
     path('unvote/<event_code>/<voted_for>', views.unvote, name='unvote'),
     path('delete_event/<event_id>', views.delete_event, name='delete'),
     path('create_campaign/', views.create_campaign, name='create_campaign'),
+    path('stats/', views.stats, name='stats'),
 ]
