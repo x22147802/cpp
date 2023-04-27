@@ -24,9 +24,9 @@ def login_request(request):
         email = request.POST['email'] 
         password = request.POST['password']
         # user = auth.authenticate(email=email, password=password)
-        user = User.objects.filter(email=email, password=password)
+        user = User.objects.filter(email=email)
         if user.exists():
-            user = User.objects.get(email=email, password=password)
+            user = User.objects.get(email=email)
             login(request, user)
             message_flag = 1
             return redirect('/')
